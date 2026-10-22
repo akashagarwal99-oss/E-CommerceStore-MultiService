@@ -1,0 +1,40 @@
+
+server {
+    listen 80;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location /api/auth/ {
+        proxy_pass http://${BACKEND_PRIVATE_IP}:3001/api/auth/;
+    }
+
+    location /api/users/ {
+        proxy_pass http://${BACKEND_PRIVATE_IP}:3001/api/users/;
+    }
+
+    location /api/products/ {
+        proxy_pass http://${BACKEND_PRIVATE_IP}:3002/api/products/;
+    }
+
+    location /api/categories {
+        proxy_pass http://${BACKEND_PRIVATE_IP}:3002/api/categories;
+    }
+
+    location /api/cart/ {
+        proxy_pass http://${BACKEND_PRIVATE_IP}:3003/api/cart/;
+    }
+
+    location /api/orders/ {
+        proxy_pass http://${BACKEND_PRIVATE_IP}:3004/api/orders/;
+    }
+
+    location /api/payments/ {
+        proxy_pass http://${BACKEND_PRIVATE_IP}:3004/api/payments/;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
