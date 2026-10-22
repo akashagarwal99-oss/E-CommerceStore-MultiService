@@ -21,3 +21,8 @@ variable "dockerhub_username" {
   type        = string
   default     = "akash0505"
 }
+variable "key_pair_name" {
+  description = "Existing AWS EC2 key pair name"
+  type        = string
+  default     = "devops"
+}

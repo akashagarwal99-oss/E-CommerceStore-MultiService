@@ -194,6 +194,7 @@ resource "aws_instance" "frontend" {
   instance_type   = var.instance_type
   subnet_id       = aws_subnet.public.id
   security_groups = [aws_security_group.frontend.id]
+  key_name        = var.key_pair_name
 
   user_data = <<-EOF
   #!/bin/bash
@@ -204,7 +205,7 @@ resource "aws_instance" "frontend" {
 
   docker pull ${var.dockerhub_username}/ecommerce-frontend:latest
 
-  docker run -d --name ecommerce-frontend --restart unless-stopped -p 80:80 -e BACKEND_PRIVATE_IP="${aws_instance.backend.private_ip}"${var.dockerhub_username}/ecommerce-frontend:latest
+  docker run -d --name ecommerce-frontend --restart unless-stopped -p 80:80 -e BACKEND_PRIVATE_IP="${aws_instance.backend.private_ip}" ${var.dockerhub_username}/ecommerce-frontend:latest
   EOF
 
   tags = {
@@ -268,6 +269,7 @@ resource "aws_instance" "backend" {
   vpc_security_group_ids = [aws_security_group.backend.id]
 
   iam_instance_profile        = aws_iam_instance_profile.backend.name
+  key_name                    = var.key_pair_name
   associate_public_ip_address = false
 
   user_data = <<-EOF
