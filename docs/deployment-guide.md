@@ -149,11 +149,7 @@ docker logout
 docker pull akash0505/ecommerce-frontend:latest
 ```
 
-> **Screenshot placeholder (not yet captured): Docker Hub repositories.**
-> What it demonstrates: the five images exist in the `akash0505` account and are public.
-> Capture the Docker Hub repository list. Save it as `docs/screenshots/dockerhub-repositories.png`, then uncomment the image line below.
->
-> <!-- ![Docker Hub repositories](screenshots/dockerhub-repositories.png) -->
+>![Docker Hub repositories](screenshots/dockerhub-repositories.png)
 
 ## 5. AWS Account and Region Prerequisites
 
@@ -242,11 +238,7 @@ The secret name `ecommerce/backend` is fixed in `main.tf` (both the data source 
 
 Do not use `get-secret-value` in screenshots or shared logs.
 
-> **Screenshot placeholder (not yet captured): Secrets Manager metadata.**
-> What it demonstrates: the secret exists in `ap-south-1`. The value must stay hidden.
-> Capture the secret overview page or the `describe-secret` output. Save it as `docs/screenshots/secrets-manager-metadata.png`, then uncomment the image line below.
->
-> <!-- ![Secrets Manager secret metadata](screenshots/secrets-manager-metadata.png) -->
+>![Secrets Manager secret metadata](screenshots/secrets-manager-metadata.png)
 
 ## 8. Terraform Variables and Configuration Files
 
@@ -297,11 +289,6 @@ terraform apply tfplan
 
 `*.tfplan` files are excluded by `.gitignore`. Terraform keeps its state in a local `terraform.tfstate` file because no remote backend is configured; keep it safe and never commit it.
 
-> **Screenshot placeholder (not yet captured): Terraform validate.**
-> What it demonstrates: the configuration is valid.
-> Capture the output of `terraform validate` ("Success! The configuration is valid."). Save it as `docs/screenshots/terraform-validate.png`, then uncomment the image line below.
->
-> <!-- ![terraform validate output](screenshots/terraform-validate.png) -->
 
 ## 10. Reviewing the Terraform Plan
 
@@ -325,11 +312,6 @@ Checks to make:
 | User-data | The backend script is shown in full. The frontend script appears as `(known after apply)` because it contains the backend's private IP, which does not exist until the backend instance is created. |
 | Unexpected actions | No `destroy` or `must be replaced` entries on a first deployment. On later plans, treat every `-/+` line and every `# forces replacement` note as a decision point (see [troubleshooting](troubleshooting.md#13-terraform-plans-that-replace-ec2-instances)). |
 
-> **Screenshot placeholder (not yet captured): Terraform plan.**
-> What it demonstrates: the planned resources and the summary line before anything is created.
-> Capture the end of the `terraform plan` output with the `Plan: ... to add` summary. Save it as `docs/screenshots/terraform-plan.png`, then uncomment the image line below.
->
-> <!-- ![terraform plan summary](screenshots/terraform-plan.png) -->
 
 ## 11. Infrastructure Creation and Output Retrieval
 
@@ -367,11 +349,7 @@ aws ec2 describe-addresses --region ap-south-1 \
   --query "Addresses[0].PublicIp" --output text
 ```
 
-> **Screenshot placeholder (not yet captured): Terraform apply and outputs.**
-> What it demonstrates: the apply completed and the outputs, including the frontend public IP, were printed.
-> Capture the end of the `terraform apply` output. Save it as `docs/screenshots/terraform-apply-outputs.png`, then uncomment the image line below.
->
-> <!-- ![terraform apply and outputs](screenshots/terraform-apply-outputs.png) -->
+>![terraform apply and outputs](screenshots/terraform-apply-outputs.png)
 
 ## 12. How the User-Data Scripts Work
 

@@ -82,12 +82,6 @@ flowchart TB
     fe -.->|"image pull at first boot"| hub
 ```
 
-> **Screenshot placeholder (not yet captured): EC2 instances.**
-> What it demonstrates: the two instances that correspond to the public frontend and the private backend in the diagram.
-> Capture the EC2 instance list showing `ecommerce-frontend-instance` and `ecommerce-backend` in the Running state. Save it as `docs/screenshots/ec2-instances.png`, then uncomment the image line below.
->
-> <!-- ![EC2 instances in ap-south-1](screenshots/ec2-instances.png) -->
-
 ## 4. Request Flow
 
 The sequence below shows two representative requests: a login, and a product list request that is redirected once by Nginx.
@@ -206,23 +200,11 @@ Both subnets are in the same Availability Zone, so the deployment has no zone-le
 | `ecommerce-public-rt` | Public subnet | `10.0.0.0/16` local (implicit), `0.0.0.0/0` to `ecommerce-igw` |
 | `ecommerce-private-rt` | Private subnet | `10.0.0.0/16` local (implicit), `0.0.0.0/0` to `ecommerce-nat-gateway` |
 
-> **Screenshot placeholder (not yet captured): VPC resource map.**
-> What it demonstrates: the VPC, its two subnets, the route tables and the gateways and how they connect.
-> Capture the VPC "Resource map" view for `ecommerce-vpc`. Save it as `docs/screenshots/vpc-resource-map.png`, then uncomment the image line below.
->
-> <!-- ![VPC resource map](screenshots/vpc-resource-map.png) -->
+>![VPC resource map](screenshots/vpc-resource-map.png)
 
-> **Screenshot placeholder (not yet captured): Route tables.**
-> What it demonstrates: the default route of the public subnet points to the Internet Gateway and the default route of the private subnet points to the NAT Gateway.
-> Capture the Routes tab of `ecommerce-public-rt` and `ecommerce-private-rt`. Save it as `docs/screenshots/route-tables.png`, then uncomment the image line below.
->
-> <!-- ![Route tables](screenshots/route-tables.png) -->
+>![Route tables](screenshots/route-tables.png)
 
-> **Screenshot placeholder (not yet captured): Internet Gateway and NAT Gateway.**
-> What it demonstrates: the Internet Gateway is attached to the VPC and the NAT Gateway is available in the public subnet with an Elastic IP.
-> Capture the details of `ecommerce-igw` and `ecommerce-nat-gateway`. Save it as `docs/screenshots/gateways.png`, then uncomment the image line below.
->
-> <!-- ![Internet Gateway and NAT Gateway](screenshots/gateways.png) -->
+>![Internet Gateway and NAT Gateway](screenshots/gateways.png)
 
 ### 7.4 Public and private components
 
@@ -253,17 +235,9 @@ The table describes the Terraform configuration. Rules added manually in the AWS
 
 The configuration defines no inbound rule for TCP 22 on either group, and no rule that lets the frontend group reach the backend on TCP 22. SSH therefore needs a rule that is added outside Terraform (see the [deployment guide](deployment-guide.md#15-ssh-into-the-frontend-instance)), and the backend instance cannot be reached over SSH with the current rules.
 
-> **Screenshot placeholder (not yet captured): Frontend security group.**
-> What it demonstrates: the only inbound rule is HTTP on port 80.
-> Capture the inbound and outbound rules of `ecommerce-frontend-sg`. Save it as `docs/screenshots/security-group-frontend.png`, then uncomment the image line below.
->
-> <!-- ![Frontend security group rules](screenshots/security-group-frontend.png) -->
+>![Frontend security group rules](screenshots/security-group-frontend.png)
 
-> **Screenshot placeholder (not yet captured): Backend security group.**
-> What it demonstrates: ports 3001 to 3004 are open only to the frontend security group.
-> Capture the inbound rules of `ecommerce-backend-sg`. Save it as `docs/screenshots/security-group-backend.png`, then uncomment the image line below.
->
-> <!-- ![Backend security group rules](screenshots/security-group-backend.png) -->
+>![Backend security group rules](screenshots/security-group-backend.png)
 
 ### 8.2 IAM role and Secrets Manager
 
@@ -280,11 +254,7 @@ How the integration works:
 
 The script runs with `set -eu`, so a failed secret lookup stops the script before any service container is started.
 
-> **Screenshot placeholder (not yet captured): Secrets Manager metadata.**
-> What it demonstrates: the secret `ecommerce/backend` exists in `ap-south-1`. Secret values must stay hidden.
-> Capture the secret's overview page without clicking "Retrieve secret value". Save it as `docs/screenshots/secrets-manager-metadata.png`, then uncomment the image line below.
->
-> <!-- ![Secrets Manager secret metadata](screenshots/secrets-manager-metadata.png) -->
+>![Secrets Manager secret metadata](screenshots/secrets-manager-metadata.png)
 
 ### 8.3 MongoDB Atlas
 

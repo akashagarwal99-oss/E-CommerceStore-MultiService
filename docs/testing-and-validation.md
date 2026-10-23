@@ -125,12 +125,6 @@ aws ec2 describe-instance-status --region ap-south-1 --include-all-instances \
 
 Expected: state `running`, system status `ok`, instance status `ok`. Status: NOT VERIFIED (not recorded).
 
-> **Screenshot placeholder (not yet captured): EC2 status checks.**
-> What it demonstrates: both instances are running and have passed their system and instance status checks.
-> Capture the EC2 instance list with the Status check column visible. Save it as `docs/screenshots/ec2-status-checks.png`, then uncomment the image line below.
->
-> <!-- ![EC2 instance status checks](screenshots/ec2-status-checks.png) -->
-
 ### 3. Docker container and image checks
 
 On the frontend instance:
@@ -148,12 +142,6 @@ The backend instance cannot be reached over SSH with the current security group 
 ```bash
 aws ec2 get-console-output --region ap-south-1 --instance-id <backend-instance-id> --latest --output text
 ```
-
-> **Screenshot placeholder (not yet captured): Frontend container running.**
-> What it demonstrates: the `ecommerce-frontend` container exists and is up, with port 80 published.
-> Capture the output of `sudo docker ps -a` and `sudo docker images` on the frontend instance. Save it as `docs/screenshots/frontend-docker-ps.png`, then uncomment the image line below.
->
-> <!-- ![Frontend container and image on the frontend instance](screenshots/frontend-docker-ps.png) -->
 
 ### 4. Backend TCP connectivity checks from the frontend instance
 
@@ -179,12 +167,6 @@ How to read the result:
 | Connection refused | The network path works, but nothing is listening on that port (the container is not running). |
 
 Observed: HTTP requests from the frontend instance to all four ports returned Express responses, which is a stronger result than an open TCP port. Status: PASS.
-
-> **Screenshot placeholder (not yet captured): Backend reachability.**
-> What it demonstrates: the frontend instance can reach the four backend service ports on the private network.
-> Capture the terminal output of the port checks (or the `curl -i` responses) on the frontend instance. Save it as `docs/screenshots/backend-reachability.png`, then uncomment the image line below.
->
-> <!-- ![Backend port checks from the frontend instance](screenshots/backend-reachability.png) -->
 
 ### 5. Direct backend API tests
 
@@ -234,12 +216,6 @@ curl -i  http://<frontend-public-ip>/api/categories
 
 The 301 comes from Nginx, not from the application (see [architecture.md](architecture.md#5-nginx-reverse-proxy-behavior)). Do not use `/health` on the frontend address as a health check: it is not proxied and returns the React `index.html`.
 
-> **Screenshot placeholder (not yet captured): Product API through the Nginx proxy.**
-> What it demonstrates: the redirect from `/api/products` to `/api/products/` and the final HTTP 200 JSON response from the product service.
-> Capture the output of `curl -iL http://<frontend-public-ip>/api/products`. Save it as `docs/screenshots/api-products-proxy.png`, then uncomment the image line below.
->
-> <!-- ![curl output for /api/products through Nginx](screenshots/api-products-proxy.png) -->
-
 ### 7. Browser Network-tab validation
 
 1. Open `http://<frontend-public-ip>` and open the browser developer tools (F12), then the Network tab. Filter by `Fetch/XHR`.
@@ -252,12 +228,6 @@ The 301 comes from Nginx, not from the application (see [architecture.md](archit
    - Responses are JSON, not HTML. An HTML response to an `/api/...` request means the path did not match an Nginx location.
 
 Status: NOT VERIFIED (procedure documented; results not recorded).
-
-> **Screenshot placeholder (not yet captured): Browser Network tab.**
-> What it demonstrates: API calls go to the frontend's own address under `/api/` and the proxy returns the expected status codes.
-> Capture the Network tab filtered to Fetch/XHR after logging in, with header values hidden. Save it as `docs/screenshots/browser-network-tab.png`, then uncomment the image line below.
->
-> <!-- ![Browser Network tab showing API calls](screenshots/browser-network-tab.png) -->
 
 ### 8. Registration and login verification
 
@@ -279,17 +249,7 @@ Expected from the source: `201` with the message `User registered successfully`,
 
 Observed: registration and the following login worked in the browser. Status: PASS. The result is also evidence that the user service is connected to MongoDB Atlas (see the Results Summary).
 
-> **Screenshot placeholder (not yet captured): Successful registration.**
-> What it demonstrates: a new account was created through the deployed application.
-> Capture the application after registering (for example the logged-in header or profile page). Do not show passwords or tokens. Save it as `docs/screenshots/registration-success.png`, then uncomment the image line below.
->
-> <!-- ![Successful user registration](screenshots/registration-success.png) -->
-
-> **Screenshot placeholder (not yet captured): Successful login.**
-> What it demonstrates: the registered user can log in.
-> Capture the application after logging in. Do not show passwords or tokens. Save it as `docs/screenshots/login-success.png`, then uncomment the image line below.
->
-> <!-- ![Successful user login](screenshots/login-success.png) -->
+>![Successful user registration](screenshots/registration-success.png)
 
 ### 9. Product endpoint response and the empty catalog
 

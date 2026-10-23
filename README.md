@@ -125,11 +125,9 @@ All resources are in `ap-south-1`. Names use the `project_name` variable (defaul
 | Secrets Manager secret (data source) | `ecommerce/backend` | Created manually; holds the MongoDB base URI and the JWT secret |
 | AMI (data source) | Amazon Linux 2 | Image for both instances |
 
-> **Screenshot placeholder (not yet captured): EC2 instances.**
-> What it demonstrates: the public frontend instance and the private backend instance running in `ap-south-1`.
-> Capture the EC2 instance list showing `ecommerce-frontend-instance` and `ecommerce-backend` in the Running state. Save it as `docs/screenshots/ec2-instances.png`, then uncomment the image line below.
->
-> <!-- ![EC2 instances in ap-south-1](docs/screenshots/ec2-instances.png) -->
+>![EC2 instances in ap-south-1](docs/screenshots/ec2-instance-frontend.png)
+
+>![EC2 instances in ap-south-1](docs/screenshots/ec2-instance-backend.png)
 
 ## Docker Image Inventory
 
@@ -164,11 +162,7 @@ The full procedure, with every command and its explanation, is in [docs/deployme
 6. Read the application address with `terraform output frontend_public_ip` and open it in a browser.
 7. Validate the deployment with [docs/testing-and-validation.md](docs/testing-and-validation.md).
 
-> **Screenshot placeholder (not yet captured): Terraform apply and outputs.**
-> What it demonstrates: a successful `terraform apply` and the output values, including `frontend_public_ip`.
-> Capture the end of the `terraform apply` output. Save it as `docs/screenshots/terraform-apply-outputs.png`, then uncomment the image line below.
->
-> <!-- ![Terraform apply and outputs](docs/screenshots/terraform-apply-outputs.png) -->
+>![Terraform apply and outputs](docs/screenshots/terraform-apply-outputs.png)
 
 ## Accessing the Application
 
@@ -176,11 +170,7 @@ The full procedure, with every command and its explanation, is in [docs/deployme
 - Get the address with `terraform output frontend_public_ip` or `terraform output frontend_public_dns`.
 - The frontend instance uses an automatically assigned public IP, not an Elastic IP. The address can change if the instance is stopped and started or replaced, so do not treat it as permanent.
 
-> **Screenshot placeholder (not yet captured): Application homepage.**
-> What it demonstrates: the React application served by the frontend instance over its public address.
-> Capture the homepage with the address bar visible. Save it as `docs/screenshots/app-homepage.png`, then uncomment the image line below.
->
-> <!-- ![Application homepage](docs/screenshots/app-homepage.png) -->
+>![Application homepage](docs/screenshots/app-homepage.png)
 
 ## Verification Summary
 
@@ -218,6 +208,8 @@ Results below were observed on the deployed environment and reported by the proj
 2. NAT Gateways, Elastic IPs and EC2 instances incur charges while they exist, so destroy the stack when you are finished.
 3. Resources created outside Terraform are not removed: the `ecommerce/backend` secret, the MongoDB Atlas cluster and its access-list entry, the EC2 key pair and the Docker Hub images. Remove them separately if they are no longer needed.
 
+>![terraform destroy after testing](docs/screenshots/terraform-destroy.png)
+
 ## Documentation Index
 
 | Document | Contents |
@@ -227,15 +219,6 @@ Results below were observed on the deployed environment and reported by the proj
 | [docs/testing-and-validation.md](docs/testing-and-validation.md) | Test procedures, results table and known limitations |
 | [docs/troubleshooting.md](docs/troubleshooting.md) | Diagnostics, common failures and the frontend container incident case study |
 
-## Submission Checklist
-
-- [ ] `terraform validate` and `terraform plan` pass, and `terraform apply` completes.
-- [ ] The five images exist on Docker Hub as public repositories.
-- [ ] The application opens on `http://<frontend-public-ip>`.
-- [ ] No secrets, `.pem` files or state files are committed.
-- [ ] Screenshots are saved in `docs/screenshots/` and every placeholder in the documentation is replaced by its image.
-- [ ] The testing table in `docs/testing-and-validation.md` matches what was actually run.
-- [ ] Cart, order and payment tests are either completed and recorded or left marked NOT VERIFIED.
 
 Screenshots expected in `docs/screenshots/`:
 
@@ -245,25 +228,13 @@ Screenshots expected in `docs/screenshots/`:
 | `terraform-apply-outputs.png` | README, deployment guide |
 | `app-homepage.png` | README |
 | `vpc-resource-map.png` | architecture |
-| `route-tables.png` | architecture |
-| `gateways.png` | architecture |
 | `security-group-frontend.png` | architecture |
 | `security-group-backend.png` | architecture |
 | `secrets-manager-metadata.png` | architecture, deployment guide |
 | `dockerhub-repositories.png` | deployment guide |
-| `terraform-validate.png` | deployment guide |
-| `terraform-plan.png` | deployment guide |
-| `ec2-status-checks.png` | testing |
-| `frontend-docker-ps.png` | testing |
-| `backend-reachability.png` | testing |
-| `api-products-proxy.png` | testing |
-| `browser-network-tab.png` | testing |
 | `registration-success.png` | testing |
-| `login-success.png` | testing |
-| `cloud-init-malformed-docker-run.png` | troubleshooting |
 
 ## Author and License
 
 - Author: Akash Agarwal ([akashagarwal99-oss](https://github.com/akashagarwal99-oss)).
-- License: MIT, see [LICENSE](LICENSE).
 - Application source: [AtharvaAI/E-CommerceStore](https://github.com/AtharvaAI/E-CommerceStore).

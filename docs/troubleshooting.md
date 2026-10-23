@@ -156,12 +156,6 @@ This mistake is valid shell syntax, so neither `terraform validate` nor a syntax
 - **Container state:** on the frontend instance `sudo docker ps -a` did not list `ecommerce-frontend` (reported by the author), while `sudo docker images` would list the pulled image.
 - **cloud-init log:** `/var/log/cloud-init-output.log` is where the failure is recorded. Expect a Docker usage error saying that `docker run` requires an image argument, followed by a note that the user-data script failed. The exact wording depends on the Docker and cloud-init versions, so capture the real output.
 
-> **Screenshot placeholder (not yet captured): cloud-init log of the failed `docker run`.**
-> What it demonstrates: the Docker error recorded in the cloud-init log when the user-data `docker run` command had no image argument.
-> Capture the relevant part of `/var/log/cloud-init-output.log` from the original frontend instance, if it is still available. Save it as `docs/screenshots/cloud-init-malformed-docker-run.png`, then uncomment the image line below.
->
-> <!-- ![cloud-init log showing the failed docker run command](screenshots/cloud-init-malformed-docker-run.png) -->
-
 ### 4.4 Manual recovery
 
 A running frontend instance can be repaired without replacing it. On the frontend instance (over SSH):
